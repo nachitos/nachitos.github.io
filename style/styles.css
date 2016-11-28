@@ -1,0 +1,541 @@
+/*
+	Archivo con los estilos dados al contenido de la página
+*/
+
+/*soporte caracteres Unicode*/
+@charset "UTF-8";
+
+/*Importa Fuentes utilizadas (se encuentran los archivos .ttf en un directorio, no de internet)*/
+@font-face {
+    font-family: 'NewRocker';
+    src: url('../fonts/NewRocker-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'EB Garamond';
+    src: url('../fonts/EBGaramond-Regular.ttf') format('truetype');
+  }
+
+/* ****************** */
+/* titulo y barra de navegacion */
+
+/* Se eliminan las margenes que los navegadores traen por defecto*/
+* {
+	margin:0;
+}
+
+/*  Gracias a un identificador se le da estilo al titulo de la pagina
+  40pixeles alto, se indica que los elementos estaran alineados de manera vertical en la centro. */
+#theTitle{
+	align: center;
+	background-color: #0F0101;
+	height: 40px;
+	vertical-align: middle;
+}
+
+/*La imágen ubicada sobre la barra de navegación (incrustada el en título) se configura de acuerdo al tamaño de la "barra de título" */
+#theTitle img{
+	height: 120px;
+	width: auto;
+}
+
+
+/* Estilo de la barra de navegacion. */
+/* La barra se queda fija (atributo->position:fixed) si se hace "sctroll, ejemplo: facebook"*/
+.navegacion {
+	list-style-type: none;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+
+/*La separacion de cada elemento del menu (que es un item en una lista)*/
+.navegacion li {
+  display: inline;
+	float: left;
+	padding-right: 10px;
+}
+
+/*  el atriuto overflow controla que la forma en que los elementos se comportan en su contenedor.
+    Se usa hidden para que esconda los elementos. */
+.navegacion ul {
+  align: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 15px 20px;
+  background-color: #5E2424;
+}
+
+
+/*Alinea el texto de cada opcion en el menu al centro y se muestra en bloque.*/
+/*Se anula la decoracion; los enlaces se muestran en "texto plano", sin subrayado, simplemente color + fuente correspondiente*/
+.navegacion li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 21px 21px;
+  text-decoration: none;
+}
+
+/* colorea el menú que coresponde a la página actualmente "abierta"
+     y  el texto se configura en negrilla. */
+.navegacion .active {
+    background-color: #BFB8B8;
+    color: #111;
+    font-weight: bold;
+}
+
+/* coloreado al pasar el mouse*/
+.navegacion li a:hover:not(.active) {
+    background-color: #821418;
+}
+
+/* el "boton" que lleva al menu de información de la página se ubica en la derecha de la barra de nanegación*/
+#about{
+  float: right;
+}
+
+/* Contenidos - página */
+
+/*Tipo de fuente utilizada en títulos, subtitulos*/
+.heavyTitle {
+    font-family: 'NewRocker', cursive;
+    color: black;
+}
+
+.image{
+  padding-left: 5%;
+}
+
+/*espaciado para imagenes incrustadas con texto (en párrafos)*/
+/*izquierda*/
+.withinPL{
+  padding-left: 2%;
+}
+/*derecha*/
+.withinPR{
+  padding-right: 2%;
+}
+
+.coverArt{
+			height: auto;
+	    width: auto;
+	    max-width: 300px;
+	    max-height: 300px;
+}
+/*coloreado para las secciones con letras de canciones*/
+.lyrics{
+		background-color: #E6E6E6;
+}
+
+/*estilo para el contenido - imagenes en el listado de autores*/
+.author{
+    display: inline-block;
+    min-width: 275px;
+    min-height: 250px;
+}
+
+.author img{
+    max-width: 40%;
+}
+
+.content{
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+		padding: 20px;
+}
+
+/*espaciado --> centrado para ubicar el contenido en las páginas*/
+.page{
+		padding: 0 15% 0 15%;
+}
+
+.bio{
+		padding-right: 10%;
+}
+
+
+/*justificación de texto en parrafos en la clase content*/
+.content p{
+    text-align: justify;
+
+}
+
+/*identificador para la imágen de mapa del sitio, ayuda a la configuracion de su tamaño*/
+#sitemap {
+  height: 100%;
+  width: 100%;
+  margin: 0px auto;
+  left: 20px;
+  right: 20px;
+}
+
+/* Establece el estilo para los enlaces dentro de la clase content*/
+.content a{
+    color: black;
+}
+/* Establece el estilo para los párrafos dentro de la clase content*/
+.content p{
+    font-size: 20px;
+}
+
+.contentB {
+  font-size: 20px;
+  font-family: 'EB Garamond', cursive;
+}
+
+/*Lineas utilizadas para dividir secciones de contenido en la página tamaño máximo de 350px.*/
+hr {
+  max-width: 350px;
+  border-color: #a9a9a9;
+  border-top: 0;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/*Fuente predeterminada las etiquetas que involucren texto*/
+h1, h2, h3, h4, a {
+font-family: 'EB Garamond', serif;
+	color: #313135;
+}
+
+a{
+  font-family: ;
+  color: #000D4B ;
+}
+p {
+font-family: 'EB Garamond', serif;
+	color: #313135;
+}
+
+/* Debido al espacio ocupado por la barra de navegación, el primer elemento (firstGroup) se ubica con margen superior*/
+.firstGroup {
+	margin-top: 16%;
+	padding: 0 15% 0 15%;
+}
+
+
+/* Agrupamiento de elementos dentro de las páginas*/
+.group1 {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 0;
+}
+
+.group2 {
+  margin-left: 14%;
+  margin-right: 14%;
+  margin-top: 0;
+  clear: both;
+}
+
+/*estilo usado para un "degradado" en las líneas de separación utilizadas*/
+hr.content-line {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(80, 50, 46, 1), rgba(0,0,0,0));
+}
+
+/*bloques de elementos utilizados para presentar "mini-secciones" como libros, peliculas, vídeos, etc. con atributos widtg fijo y height automático.*/
+.block{
+	float: left;
+	margin: 10px;
+	padding: 10px;
+	width: 380px;
+	height: auto;
+}
+
+/* justificación del texto que aparece en etiquetas de párrafo */
+.bloque p {
+  text-align: justify;
+}
+
+/*Color de fondo para el cuerpo, es decir, espacio entre la barra de navegacion y el footer (en todas las páginas)*/
+body {
+	background-color: #BFB8B8;
+}
+
+
+/* "presentación" (proto-carrusel) usada en home*/
+
+/* La presentacion ubicada en el home de la página se realizó usando como guía
+   el ejemplo disponile en:
+	https://www.smashingmagazine.com/2012/04/pure-css3-cycling-slideshow/
+  Es una lista de imágenes con una sencilla animación, lograda sin necesidad de usar javascript
+	*/
+
+  /* gracias a z-index -1 se envia al fondo logrando así que no interfiera con otros elementos presentes en la  la pagina */
+/*Gracias a (hidden) Si esconde un "trozo" de imagen si alguna sobresale del bloque.*/
+
+
+.contenedor {
+	margin:0 auto;
+	overflow:hidden;
+  position: relative;
+	z-index: -1;
+}
+
+/*tamaño del bloque y se configurauna posicion relativa*/
+#presentacion {
+   border: 5px solid #653333;
+   height: 600px;
+   width: 700px;
+   left: 22%;
+   position: relative;
+}
+
+/* Esconde las imagenes de la presentacion */
+
+#mask {
+   overflow: hidden;
+   height: 600px;
+}
+
+/*El contenedor es una lista "común"*/
+#presentacion ul {
+   margin: 0;
+   padding: 0;
+   position: relative;
+}
+
+/*Cada elemento de la lista es una imagen*/
+#presentacion li {
+   width: 480px;
+   height: 480px;
+   position: absolute;
+   list-style: none;
+}
+
+/*  Determina el tiempo de la animacion para cada elemento de la lista-->imágenes */
+#presentacion li.firstanimation {
+   animation: cycle 25s linear infinite;
+}
+
+#presentacion li.secondanimation {
+   animation: cycletwo 25s linear infinite;
+}
+
+#presentacion li.thirdanimation {
+   animation: cyclethree 25s linear infinite;
+}
+
+#presentacion li.fourthanimation {
+   animation: cyclefour 25s linear infinite;
+}
+
+#presentacion li.fifthanimation {
+   animation: cyclefive 25s linear infinite;
+}
+
+/* Se usa @keyframes para realizar la animacion.*/
+/* se muestra la imagen por tres segundos,y se ve en la animacion durante un segundo.. En total son 5 elementos pertenecientes a la lista.*/
+
+/*Las animaciones se "intercalan -- el efecto de unas es aparecer/desaparecer verticalmete, de arriba hacia abajo, otras horizontalmente de izquierda a derecha"*/
+
+@keyframes cycle {
+   0%  { left: 0px; } /* Primera imagen visible al iniciar presentacion */
+   4%  { left: 0px; } /* Posicion original de la imagen */
+   16% { left: 0px; opacity:1; z-index:0; } /* Imagen visible por 3 segundos */
+   20% { left: 325px; opacity: 0; z-index: 0; } /* Sale la imagen durante un segundo */
+   21% { left: -325px; opacity: 0; z-index: -1; } /* regresa a la posicion original */
+   92% { left: -325px; opacity: 0; z-index: 0; }
+   96% { left: -325px; opacity: 0; } /* Espera que el resto pase. Entra para realizar presentacion*/
+   100%{ left: 0px; opacity: 1; }
+}
+
+@keyframes cycletwo {
+   0%  { top: -325px; opacity: 0; } /* Posicion original, esta por fuera de la presentacion */
+   16% { top: -325px; opacity: 0; }/* Se mueve a esa posicion */
+   20% { top: 0px; opacity: 1; }
+   24% { top: 0px; opacity: 1; }  /* Entra imagen al recuadro*/
+   36% { top: 0px; opacity: 1; z-index: 0; }   /* La imagen es visible por 3 segundos */
+   40% { top: 325px; opacity: 0; z-index: 0; } /* Sale imagen durante un segundo */
+   41% { top: -325px; opacity: 0; z-index: -1; }   /* Vuelve a la posicion original */
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+
+@keyframes cyclethree {
+   0%  { left: -325px; opacity: 0; }
+   36% { left: -325px; opacity: 0; }
+   40% { left: 0px; opacity: 1; }
+   44% { left: 0px; opacity: 1; }
+   56% { left: 0px; opacity: 1; }
+   60% { left: 325px; opacity: 0; z-index: 0; }
+   61% { left: -325px; opacity: 0; z-index: -1; }
+   100%{ left: -325px; opacity: 0; z-index: -1; }
+}
+
+@keyframes cyclefour {
+   0%  { top: -325px; opacity: 0; }
+   56% { top: -325px; opacity: 0; }
+   60% { top: 0px; opacity: 1; }
+   64% { top: 0px; opacity: 1; }
+   76% { top: 0px; opacity: 1; z-index: 0; }
+   80% { top: 325px; opacity: 0; z-index: 0; }
+   81% { top: -325px; opacity: 0; z-index: -1; }
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+
+@keyframes cyclefive {
+   0%  { top: -325px; opacity: 0; }
+   76% { top: -325px; opacity: 0; }
+   80% { top: 0px; opacity: 1; }
+   84% { top: 0px; opacity: 1; }
+   96% { top: 0px; opacity: 1; z-index: 0; }
+   100%{ top: 325px; opacity: 0; z-index: 0; }
+}
+
+
+@keyframes fullexpand {
+   /* Sin animarse */
+   0%, 20%, 40%, 60%, 80%, 100% { width: 0%; opacity: 0; }
+
+   /* Inicia el movimiento */
+   4%, 24%, 44%, 64%, 84% { width: 0%; opacity: 0.3; }
+
+   /* Anima durante 3 segundos */
+   16%, 36%, 56%, 76%, 96% { width: 100%; opacity: 0.7; }
+
+   /* Finaliza...*/
+   17%, 37%, 57%, 77%, 97% { width: 100%; opacity: 0.3; }
+
+   /* Desaparece y se repite el ciclo */
+}
+
+
+/* Texto incrustado en la imagen dentro de la presentación (ej: legado)*/
+#presentacion .tooltip {
+   background: rgba(0,0,0,0.7);
+   width: 300px;
+   height: 60px;
+   position: absolute;
+   bottom: 75px;
+
+}
+
+/* Estilo del texto incrustado */
+#presentacion .tooltip h1 {
+   color: #fff;
+   font-size: 24px;
+   font-weight: 300;
+   line-height: 60px;
+   padding: 0 0 0 10px;
+}
+
+
+
+/* pie de página */
+
+/* Pie de pagina. Ubicado debajo de todo elemento presente gracias al atributo clear, sin decoraciones adicionales*/
+/* Una barra muy senciila, con un poco de texto en el centro, sin mayor decoración; solo fuente + color*/
+
+.footer {
+  left: 0;
+  right: 0;
+  margin: 0;
+  clear: both;
+  position: block;
+  text-align: center;
+  text-decoration: none;
+  background-color: #000;
+  height: 70px;
+  font-size: 75%;
+}
+
+/* Color del texto presente en el footer*/
+.footer p {
+  color: white;
+}
+
+/*identificador para la imágen de mapa del sitio, ayuda a la configuracion de su tamaño*/
+#sitemap {
+  height: 100%;
+  width: 100%;
+  margin: 0px auto;
+  left: 20px;
+  right: 20px;
+}
+
+
+/**************************/
+/*Cumplimiento requisito "responsive" para pantallas con ancho menor o igual a 480px (normalmente dispositivos móviles)*/
+
+@media screen and (max-width: 480px) {
+
+  #theTitle img{
+  	height: 40px;
+  	width: auto;
+  }
+  .firstGroup{
+    margin-top: 800;
+  }
+    /*Cada bloque cambia, ahora es una columa en una pantalla con la  resolucion especificada */
+    .block{
+    	width: 100%;
+    	height: 100%
+    }
+
+/*La barra de navegación, ya no se "mueve" con el "scroll" como sucede con la página en pantallas resolución "amplia": más de 480px */
+    .navegacion{
+      position: static;
+    }
+
+    .navegacion ul {
+    	position: inline;
+    	background-color: #5E2424;
+    	text-decoration: none;
+    	list-style: none;
+    }
+
+    .navegacion li a {
+      font-size: 0;
+      padding-right: 0px;
+      padding: 0;
+      margin: 10;
+      font-size: 75%;
+    }
+
+
+    .navegacion li {
+      padding-right: 30px;
+    }
+
+    /* el primer grupo ya no requiere margin top, por el cambio de comportamiento enla barra de navegación.*/
+    .firstGroup{
+    	margin-top: 0;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+
+    /*Disminuye el ancho del elemento bloque */
+    .bloque {
+      width: 280px;
+    }
+
+    /* EL menu de "info" mueve su posición original, y se "reune" con el resto de menús de la barra de navegación*/
+    #about{
+      float: left;
+    }
+
+    /* Se reduce el contenedor de la presentacion de imagenes*/
+    .contenedor {
+      width: 280px;
+    }
+}
+
+
+/* Modificaciones cuando el alto de la pagina es de 460px o menos*/
+@media screen and (max-height: 480px) {
+  /* La barra de navegacion cambia a estatico*/
+   .navegacion{
+      position: static;
+    }
+
+    /* Grupo cambia de margen, debido a la barra de navegacion*/
+    .firstGroup{
+      margin-top: 0;
+    }
+
+}
