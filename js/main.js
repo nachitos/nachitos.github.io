@@ -8,4 +8,5 @@ game.state.add('fallen', fallen);
 game.state.add('loose', loose);
 game.state.add('win', win);
 
+//se llama para iniciar el primer estado
 game.state.start('boot');

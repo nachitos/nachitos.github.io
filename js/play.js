@@ -4,7 +4,7 @@ var background; //capa del fondo del nivel, contiene cielo, y objetos de no-coli
 var collision; //capa con el suelo, y plataformas que colisionan (permiten correr, saltar) al personaje
 var cursors; //utilizado para el control de teclas
 var runner; //personaje manejado por el usuario
-var snake;
+var snake; //snake,2,3 enemigos con movimiento
 var snake2;
 var snake3;
 var score = 0; //variable para el puntaje que acumula el jugador a lo largo de la partida, valor inicial de 0
@@ -13,17 +13,18 @@ var skSpeed;
 var score = 0;
 var maxDistance;
 var ramen; //comida que debe recoger el personaje
-var tatsu; //punto de finalizacion de la partida
+var tatsu; //punto de finalizacion de la partida (sapo amarillo)
 var manda; //enemigos sin movimiento
-var directEnemy = 1;
-var qramen;
-var lefty = true;
+var lefty = true; //condiciones de arranque para el movimiento de las serpientes
 var lefty2 = true;
 var lefty3 = true;
+var backSound;
+var hitSound;
+
 var play = {
 
     //esta función carga los recursos necesarios que aparecen en el transcurso del 
-    //juego como el mapa (o "mundo") imagen del personaje, etc
+    //juego como el mapa (o "mundo") imagen del personaje, sonidos, etc
     preload: function (){
         game.load.tilemap('map', 'assets/tilemaps/map.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/images/generic_platformer_tiles.png');
@@ -36,6 +37,9 @@ var play = {
         game.load.spritesheet('snake2', 'assets/images/snakes.png', 48,48,96);
         game.load.spritesheet('snake3', 'assets/images/snakes.png', 48,48,96);
 
+        game.load.audio('backSound','assets/sounds/jiraiyatheme.mp3');
+        game.load.audio('hitSound','assets/sounds/hit.mp3');
+
     }, 
 
     create: function(){
@@ -47,6 +51,12 @@ var play = {
         background = map.createLayer('background');
         collision = map.createLayer('collision');
 
+        //agrega el sonido cargado en la funcion preload
+        backSound = game.add.audio('backSound');
+        hitSound = game.add.audio('hitSound');
+
+        //reproduce la musica de fondo para este estado (menu), con tiempo de inicio 0, 60% de volumen y repetir cicliamente habilitado
+        backSound.play('',0 , 0.6, true);
 
         //empieza la fisica (tipo arcade)
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -84,18 +94,7 @@ var play = {
     },
 
     createEnemies: function(){
-        /*
-        maxDistance = 4;
-        snake = game.add.sprite(650,700,'snake');
-        game.physics.enable(snake);
-        runner.body.tilePadding.set(32);
-        game.physics.arcade.gravity.y = 68;
-        previous = snake.body.x;        
-        previous = snake.body.x;
-        skSpeed = snake.body.velocity.x;
-
-        snake.animations.add('right',[75,76,77],true);
-        snake.animations.add('left',[63,64,65],true);*/
+        //creacion de los enemigos
 
         //serpientes con movimiento
         snake = game.add.sprite(1343,450,'snake');
@@ -136,11 +135,10 @@ var play = {
         staticSnake =  manda.create(3760 , 700,'manda');
         staticSnake.body.gravity.y = 270;
 
-
-
     },
 
     createRamen: function() {
+        //creacion de los objetos "acumulables" por jiraiya
         ramen = game.add.group();
         ramen.enableBody = true;
 
@@ -229,34 +227,23 @@ var play = {
         game.physics.arcade.overlap(runner, snake2, this.hitEnemy, null, this);
         game.physics.arcade.overlap(runner, snake3, this.hitEnemy, null, this);
 
+        // Colision entre el personaje y las serpientes estaticas(se llama a killedByManda cuando sucede)
         game.physics.arcade.overlap(runner, manda, this.killedByManda, null, this);
 
+        //se finaliza el juego cuando jiraiya encuentr a tatsu
         game.physics.arcade.overlap(runner, tatsu, this.endGame, null, this);
 
 
 
-        //game.time.events.duration.toFixed(10);
         
+        //eventos repetitivos para el movimiento de las serpientes
         game.time.events.loop(Phaser.Timer.SECOND * 4, this.moveSnake, game);
 
         game.time.events.loop(Phaser.Timer.SECOND * 4, this.moveSnake2, game);
 
         game.time.events.loop(Phaser.Timer.SECOND * 4, this.moveSnake3, game);
-        //myTimer.delay = 100;
-
-       // this.moveSnake();
-
-
-        // Colision entre las estrellas y el mapa
-        //game.physics.arcade.collide(stars, layer);
-
-        // Si la chica toca hiedra venenosa
-        //game.physics.arcade.overlap(girl, poison, this.loose, null, this);
-
-        // Si la chica toca una estrella
-        //game.physics.arcade.overlap(girl, stars, this.increaseScore, null, this);
-
-        // Mover a la chica
+       
+        //mover al personaje
         this.moveRunner();
 
     },
@@ -277,7 +264,7 @@ var play = {
             runner.animations.play('right');
         } else if (cursors.down.isDown){
             runner.body.velocity.y = 250;
-        }else {
+        } else {
             // Cuando no se hace nada, se detiene
             runner.animations.stop();
             runner.frame = 0;
@@ -288,10 +275,6 @@ var play = {
             runner.body.velocity.y = -150;
         }
 
-        // Cuando encuentra la posicion de la cueva, se termina
-        /*if (girl.body.x >= 1500 && girl.body.y <= 97) {
-            game.state.start('end');
-        }*/
 
         // Si cae al agua pierde la partida
         if (runner.body.y >= 850) {
@@ -299,6 +282,7 @@ var play = {
         }
     },
 
+   //las 3 funciones siguientes mueven las serpientes 
    moveSnake: function(){
 
         if(snake.body.x <= 1210 || lefty == true){
@@ -341,25 +325,27 @@ var play = {
         }
     },
 
-    //Acumulación del puntaje de la partida
+    //Acumulación del puntaje por ramen de la partida
     collectRamen: function (ramen, runner) {
         runner.kill();
         score += 10;
     },
 
+    //encuentro de jiraiya con las serpientes
     hitEnemy: function (snake, runner){
         if(runner.body.touching.up){
-            runner.kill();
+            hitSound.play();
+            runner.kill(); //las derrota si cae sobre ellas
             score += 30;
         }
         else{
-            snake.kill();
+            snake.kill(); //es derrotado si las enfrenta directamente
             game.state.start('loose');
         }
     },
 
     killedByManda: function(manda, runner){
-        manda.kill();
+        manda.kill(); //es derrotado
         game.state.start('loose');
     },
 
